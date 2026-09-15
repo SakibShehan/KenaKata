@@ -2,8 +2,11 @@
 "use client";
 
 import Link from "next/link";
+import { useTheme } from "@/context/ThemeContext";
 
 export function Navbar() {
+
+      const { theme, toggleTheme } = useTheme();
 
 
   return (
@@ -47,7 +50,13 @@ export function Navbar() {
             Sign up
           </Link>
 
-        
+                   <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="rounded-md border border-gray-300 p-2 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
         </div>
       </nav>
     </header>

@@ -1,4 +1,3 @@
-// src/components/home/Hero.tsx
 export function Hero() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 text-center sm:py-28">
