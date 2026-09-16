@@ -1,6 +1,6 @@
-// src/components/cart/OrderSummary.tsx
 "use client";
 
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
 export function OrderSummary() {
@@ -35,12 +35,21 @@ export function OrderSummary() {
         <span>${total.toFixed(2)}</span>
       </div>
 
-      <button
-        disabled={items.length === 0}
-        className="mt-6 w-full rounded-md bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-gray-700 disabled:opacity-40 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-      >
-        Proceed to Checkout
-      </button>
+      {items.length > 0 ? (
+        <Link
+          href="/checkout"
+          className="mt-6 block w-full rounded-md bg-gray-900 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        >
+          Proceed to Checkout
+        </Link>
+      ) : (
+        <button
+          disabled
+          className="mt-6 w-full rounded-md bg-gray-900 px-4 py-3 text-sm font-semibold text-white opacity-40 dark:bg-white dark:text-gray-900"
+        >
+          Proceed to Checkout
+        </button>
+      )}
     </div>
   );
 }
