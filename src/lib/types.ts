@@ -15,10 +15,16 @@ export interface Product {
   images: string[];
 }
 
+
 export interface User {
   id: number;
   email: string;
   name: string;
   role: "customer" | "admin";
   avatar: string;
+}
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
 }

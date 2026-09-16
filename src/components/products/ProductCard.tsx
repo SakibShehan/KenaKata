@@ -1,6 +1,8 @@
+// src/components/products/ProductCard.tsx
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
+import { getSafeImageUrl } from "@/lib/utils";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -10,7 +12,7 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="relative aspect-square w-full overflow-hidden bg-gray-100 dark:bg-gray-900">
         <Image
-          src={product.images[0]}
+          src={getSafeImageUrl(product.images[0])}
           alt={product.title}
           fill
           className="object-cover transition-transform group-hover:scale-105"
