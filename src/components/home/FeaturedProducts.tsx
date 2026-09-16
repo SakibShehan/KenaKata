@@ -3,7 +3,7 @@ import { getFeaturedProducts } from "@/lib/api/products";
 import { ProductCard } from "@/components/products/ProductCard";
 
 export async function FeaturedProducts() {
-  const products = await getFeaturedProducts(8);
+  const products = await getFeaturedProducts(12);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">

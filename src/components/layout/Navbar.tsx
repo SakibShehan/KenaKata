@@ -1,13 +1,12 @@
-
 "use client";
 
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
+import { useAuth } from "@/context/AuthContext";
 
 export function Navbar() {
-
-      const { theme, toggleTheme } = useTheme();
-
+  const { theme, toggleTheme } = useTheme();
+  const { user, loading, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
@@ -36,21 +35,38 @@ export function Navbar() {
             </svg>
           </Link>
 
-          <Link
-            href="/login"
-            className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
-          >
-            Login
-          </Link>
+          {!loading && !user && (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
 
-          <Link
-            href="/register"
-            className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-          >
-            Sign up
-          </Link>
+          {!loading && user && (
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Hi, {user.name.split(" ")[0]}
+              </span>
+              <button
+                onClick={logout}
+                className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+              >
+                Logout
+              </button>
+            </div>
+          )}
 
-                   <button
+          <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="rounded-md border border-gray-300 p-2 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"

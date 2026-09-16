@@ -14,3 +14,11 @@ export interface Product {
   category: Category;
   images: string[];
 }
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  role: "customer" | "admin";
+  avatar: string;
+}
