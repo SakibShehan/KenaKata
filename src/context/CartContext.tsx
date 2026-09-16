@@ -1,32 +1,48 @@
+// src/context/CartContext.tsx
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import type { CartItem, Product } from "@/lib/types";
+import { useAuth } from "@/context/AuthContext";
 
 interface CartContextValue {
   items: CartItem[];
   addItem: (product: Product) => void;
   removeItem: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
+  clearCart: () => void;
   total: number;
   itemCount: number;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const GUEST_CART_KEY = "kenakata-cart-guest";
+
+function cartKey(userId: number | undefined): string {
+  return userId ? `kenakata-cart-${userId}` : GUEST_CART_KEY;
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { user, loading: authLoading } = useAuth();
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
+  // Load the right cart 
   useEffect(() => {
-    const saved = localStorage.getItem("kenakata-cart");
-    if (saved) setItems(JSON.parse(saved));
+    if (authLoading) return; 
+    const key = cartKey(user?.id);
+    const saved = localStorage.getItem(key);
+    setItems(saved ? JSON.parse(saved) : []);
     setHydrated(true);
-  }, []);
+  }, [user?.id, authLoading]);
 
+  // Save to that same slot whenever the cart changes.
   useEffect(() => {
-    if (hydrated) localStorage.setItem("kenakata-cart", JSON.stringify(items));
-  }, [items, hydrated]);
+    if (!hydrated) return;
+    const key = cartKey(user?.id);
+    localStorage.setItem(key, JSON.stringify(items));
+  }, [items, hydrated, user?.id]);
 
   function addItem(product: Product) {
     setItems((prev) => {
@@ -45,9 +61,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   function updateQuantity(productId: number, quantity: number) {
+    if (quantity < 1) return;
     setItems((prev) =>
       prev.map((i) => (i.product.id === productId ? { ...i, quantity } : i))
     );
+  }
+
+  function clearCart() {
+    setItems([]);
   }
 
   const total = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
@@ -55,7 +76,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, total, itemCount }}
+      value={{ items, addItem, removeItem, updateQuantity, clearCart, total, itemCount }}
     >
       {children}
     </CartContext.Provider>
