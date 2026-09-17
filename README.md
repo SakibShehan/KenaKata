@@ -2,7 +2,7 @@
 
 A production-style e-commerce storefront built with Next.js App Router, TypeScript, and Tailwind CSS, powered by the [Platzi Fake Store API](https://api.escuelajs.co/api/v1). Built as a capstone project for the Workshop Studio: React & Next.js Interactive Lessons.
 
-**Live Demo:** https://vercel.com/shehan6/kena-kata-fqmn
+**Live Demo:** https://kena-kata-fqmn-nine.vercel.app/
 
 ---
 
