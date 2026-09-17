@@ -11,7 +11,7 @@ A production-style e-commerce storefront built with Next.js App Router, TypeScri
 Kenakata is a full-featured storefront demonstrating modern Next.js patterns end to end: a browsable product catalog with search/filter/sort/pagination, a guest-friendly cart and wishlist that persist per user, authentication with session persistence, and a mock checkout flow — all built against a public, shared third-party API with no database of its own.
 
 **Core features:**
-- Home page with an auto-sliding hero carousel, featured products, and category browsing
+- Home page with Header,auto-sliding hero carousel, featured products, category browsing and footer
 - Product listing with live search, category/price filters, sorting, and pagination
 - Product detail pages with related products, Add to Cart, and Buy Now
 - Wishlist with a heart-toggle on every product card, persisted per user
