@@ -4,7 +4,7 @@ import { getCategories } from "@/lib/api/categories";
 
 export async function CategoriesSection() {
   const categories = await getCategories();
-  const shown = categories.slice(1, 7);
+  const shown = categories.slice(0, 7);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
