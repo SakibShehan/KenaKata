@@ -1,8 +1,10 @@
+// src/app/products/[productSlug]/page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getProductBySlug } from "@/lib/api/products";
 import { getSafeImageUrl } from "@/lib/utils";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
+import { BuyNowButton } from "@/components/products/BuyNowButton";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
 
 interface Props {
@@ -48,9 +50,13 @@ export default async function ProductDetailPage({ params }: Props) {
             {product.description}
           </p>
 
-          <div className="mt-6">
-            <AddToCartButton product={product} />
-          </div>
+      
+
+      
+          <div className="mt-6 flex gap-3">
+  <AddToCartButton product={product} />
+  <BuyNowButton product={product} variant="full" />
+</div>
         </div>
       </div>
 
