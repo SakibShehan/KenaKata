@@ -31,6 +31,13 @@ export function Navbar() {
         </Link>
 
         <div className="flex items-center gap-6">
+<Link
+  href="/"
+  className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+>
+  Home
+</Link>
+          
           <Link
             href="/products"
             className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
