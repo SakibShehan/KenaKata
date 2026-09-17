@@ -1,4 +1,3 @@
-// src/context/CartContext.tsx
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
@@ -28,20 +27,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  // Load the right cart 
+  // Things added to cart automatically after login and stored in local storage. 
   useEffect(() => {
-    if (authLoading) return; 
+    if (authLoading) return;
     const key = cartKey(user?.id);
     const saved = localStorage.getItem(key);
     setItems(saved ? JSON.parse(saved) : []);
     setHydrated(true);
   }, [user?.id, authLoading]);
 
-  // Save to that same slot whenever the cart changes.
   useEffect(() => {
     if (!hydrated) return;
-    const key = cartKey(user?.id);
-    localStorage.setItem(key, JSON.stringify(items));
+    localStorage.setItem(cartKey(user?.id), JSON.stringify(items));
   }, [items, hydrated, user?.id]);
 
   function addItem(product: Product) {
