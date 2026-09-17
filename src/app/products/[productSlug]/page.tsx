@@ -5,6 +5,7 @@ import { getProductBySlug } from "@/lib/api/products";
 import { getSafeImageUrl } from "@/lib/utils";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
 import { BuyNowButton } from "@/components/products/BuyNowButton";
+import { WishlistButton } from "@/components/products/WishlistButton";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
 
 interface Props {
@@ -37,6 +38,7 @@ export default async function ProductDetailPage({ params }: Props) {
             priority
             className="object-cover"
           />
+          <WishlistButton product={product} />
         </div>
 
         <div>
@@ -50,13 +52,10 @@ export default async function ProductDetailPage({ params }: Props) {
             {product.description}
           </p>
 
-      
-
-      
           <div className="mt-6 flex gap-3">
-  <AddToCartButton product={product} />
-  <BuyNowButton product={product} variant="full" />
-</div>
+            <AddToCartButton product={product} />
+            <BuyNowButton product={product} variant="full" />
+          </div>
         </div>
       </div>
 

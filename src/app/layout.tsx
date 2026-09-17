@@ -1,8 +1,8 @@
-// src/app/layout.tsx
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -18,9 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <AuthProvider>
             <CartProvider>
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <WishlistProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </WishlistProvider>
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>

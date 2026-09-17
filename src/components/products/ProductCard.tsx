@@ -1,10 +1,10 @@
-// src/components/products/ProductCard.tsx
 import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { getSafeImageUrl } from "@/lib/utils";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
 import { BuyNowButton } from "@/components/products/BuyNowButton";
+import { WishlistButton } from "@/components/products/WishlistButton";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -17,6 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
             fill
             className="object-cover transition-transform group-hover:scale-105"
           />
+          <WishlistButton product={product} />
         </div>
         <div className="p-3 pb-2">
           <p className="truncate text-sm font-medium text-gray-900 dark:text-white">

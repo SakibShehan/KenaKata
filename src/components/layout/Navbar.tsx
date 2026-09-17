@@ -1,15 +1,16 @@
-
 "use client";
 
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { user, loading, logout } = useAuth();
   const { itemCount } = useCart();
+  const { count: wishlistCount } = useWishlist();
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
@@ -26,6 +27,23 @@ export function Navbar() {
             Products
           </Link>
 
+          {/* Wishlist icon */}
+          <Link
+            href="/wishlist"
+            aria-label="Wishlist"
+            className="relative text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z" />
+            </svg>
+            {wishlistCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
+
+          {/* Cart icon */}
           <Link
             href="/cart"
             aria-label="Cart"

@@ -1,10 +1,10 @@
-// src/context/AuthContext.tsx
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import type { User } from "@/lib/types";
 import { mergeGuestCartIntoUser } from "@/lib/cart";
+import { mergeGuestWishlistIntoUser } from "@/lib/wishlist";
 
 interface AuthContextValue {
   user: User | null;
@@ -37,7 +37,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Login failed");
 
-    mergeGuestCartIntoUser(data.user.id); // merge BEFORE setUser, so CartContext reads the merged result
+    mergeGuestCartIntoUser(data.user.id);
+    mergeGuestWishlistIntoUser(data.user.id);
     setUser(data.user);
   }
 
@@ -51,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!res.ok) throw new Error(data.error || "Registration failed");
 
     mergeGuestCartIntoUser(data.user.id);
+    mergeGuestWishlistIntoUser(data.user.id);
     setUser(data.user);
   }
 
