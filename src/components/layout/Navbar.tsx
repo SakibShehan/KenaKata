@@ -1,6 +1,8 @@
+
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "@/context/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
@@ -15,8 +17,17 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Kenakata
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/logo.png"
+            alt="Kenakata logo"
+            width={35}
+            height={35}
+            className="rounded-sm"
+          />
+          <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Kenakata
+          </span>
         </Link>
 
         <div className="flex items-center gap-6">
@@ -63,10 +74,16 @@ export function Navbar() {
 
           {!loading && !user && (
             <>
-              <Link href="/login" className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white">
+              <Link
+                href="/login"
+                className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+              >
                 Login
               </Link>
-              <Link href="/register" className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200">
+              <Link
+                href="/register"
+                className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+              >
                 Sign up
               </Link>
             </>
@@ -74,8 +91,13 @@ export function Navbar() {
 
           {!loading && user && (
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-700 dark:text-gray-300">Hi, {user.name.split(" ")[0]}</span>
-              <button onClick={logout} className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white">
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Hi, {user.name.split(" ")[0]}
+              </span>
+              <button
+                onClick={logout}
+                className="text-sm font-medium text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-white"
+              >
                 Logout
               </button>
             </div>

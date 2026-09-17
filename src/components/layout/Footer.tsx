@@ -1,4 +1,3 @@
-// src/components/layout/Footer.tsx
 import Link from "next/link";
 
 const SHOP_LINKS = [
